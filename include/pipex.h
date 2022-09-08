@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/07 18:00:08 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/08 13:38:47 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@ void		__print_lst(t_list *lst);
 
 // PARSER
 t_parse	*__parse(int argc, char **argv);
+
+// EXECUTE
+void	__execute(t_parse *parsing, char **envp);
 
 #endif
