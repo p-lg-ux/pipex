@@ -6,7 +6,7 @@
 #    By: pgros <pgros@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 14:58:11 by pgros             #+#    #+#              #
-#    Updated: 2022/09/07 20:02:32 by pgros            ###   ########.fr        #
+#    Updated: 2022/09/09 15:52:36 by pgros            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,8 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
+DEBUG_FLAGS = -fsanitize=address
+
 LIBNAME = 42
 
 LIBDIR = ./lib42
@@ -95,7 +97,11 @@ re: fclean clean all
 print_objs: $(OBJS)
 	echo $(OBJS)
 
+debug: $(OBJS) $(INC)
+	make -C $(LIBDIR)
+	$(CC) $(DEBUG_FLAGS) $(INC) $(OBJS) -o $(NAME) -l$(LIBNAME) -L$(LIBDIR)
+
 print_src: $(addprefix ./src/, $(SRC))
 	echo $(addprefix ./src/, $(SRC))
 	
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re debug

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 16:18:31 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/07 18:00:03 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/09 17:11:26 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	__free_content(void *c)
 
 void	__print_content(t_content *content)
 {
-	ft_printf("cmd : %s\n", content->cmd);
+	ft_printf("cmd : %s (%i -> %i)\n", content->cmd,
+		(content->fds_in)[0], (content->fds_in)[1]);
 }

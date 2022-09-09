@@ -1,45 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   open_fds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 13:37:13 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/09 17:46:31 by pgros            ###   ########.fr       */
+/*   Created: 2022/09/09 16:47:09 by pgros             #+#    #+#             */
+/*   Updated: 2022/09/09 17:44:38 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-void	__child_process(t_list *command, char **envp)
+int	__open_fds(t_parse *parsing)
 {
-	
-}
+	int		fds_files[2];
+	t_list	*command;
 
-void	__fork_process(t_list *command, char **envp)
-{
-	int	child;
-
-	child = fork();
-	if (child < -1)
-	{
-		perror();
-		exit(EXIT_FAILURE);
-	}
-	if (child == 0)
-		__child_process(command, envp);
-}
-
-void	__execute(t_parse *parsing, char **envp)
-{
-	t_list	*commands;
-
-	__open_fds(parsing);
+	fds_files[0] = open(parsing->infile, O_RDONLY);
+	fds_files[1] = open(parsing->outfile, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (fds_files[0] < 0 || fds_files[1] < 0)
+		return(perror(), -1);
 	command = parsing->commands;
-	while (command != NULL)
-	{
-		__fork_process(command, envp);
-		command = commands->next;
-	}
+	((t_content *) command)->fds_in = fds_files;
+	command = ft_lstlast(parsing->commands);
+	((t_content *) command)->fds_out = fds_files;
+	return (0);
 }
