@@ -6,7 +6,7 @@
 #    By: pgros <pgros@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 14:58:11 by pgros             #+#    #+#              #
-#    Updated: 2022/09/09 15:52:36 by pgros            ###   ########.fr        #
+#    Updated: 2022/09/14 15:07:46 by pgros            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC_PARSER_FILES = parse.c
 
 SRC_UTILS_FILES = content_utils.c \
 					parse_utils.c \
-					lst_utils.c
+					lst_utils.c \
+					strtab_utils.c
 
 SRC_PARSER = $(addprefix parser/, $(SRC_PARSER_FILES))
 

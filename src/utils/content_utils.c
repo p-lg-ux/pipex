@@ -6,26 +6,11 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 16:18:31 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/13 15:58:17 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/14 15:06:55 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
-
-void	__free_strtab(char **tab)
-{
-	int	i;
-	
-	if (tab == NULL)
-		return ;
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 
 t_content	*__newcontent(char *cmd)
 {
@@ -42,6 +27,7 @@ t_content	*__newcontent(char *cmd)
 	new->arg = ft_split(new_cmd, ' ');
 	if (new->arg != NULL)
 		new->cmd_short = ft_strdup((new->arg)[0]);
+	new->path = NULL;
 	return (new);
 }
 

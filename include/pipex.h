@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/13 16:09:36 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/14 15:06:46 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct s_content{
 
 // UTILS
 void		__free_strtab(char **tab);
+
 t_content	*__newcontent(char *cmd);
 void		__free_content(void *c);
 void		__print_content(t_content *content);
