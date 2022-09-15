@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/14 15:06:46 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/15 17:47:19 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ struct s_content{
 
 // UTILS
 void		__free_strtab(char **tab);
+int			__strtab_len(char **tab);
+void		__print_strtab(char **tab);
 
 t_content	*__newcontent(char *cmd);
 void		__free_content(void *c);
@@ -55,5 +57,10 @@ t_parse		*__parse(int argc, char **argv);
 
 // EXECUTE
 void		__execute(t_parse *parsing, char **envp);
+
+char		**__get_path_var_tab(char **envp);
+char		**__get_paths_list(t_list *command, char **envp);
+void		__fill_paths_list(char **str_tab, char **path_var,
+				t_list *command);
 
 #endif

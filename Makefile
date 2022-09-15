@@ -6,7 +6,7 @@
 #    By: pgros <pgros@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 14:58:11 by pgros             #+#    #+#              #
-#    Updated: 2022/09/14 15:07:46 by pgros            ###   ########.fr        #
+#    Updated: 2022/09/15 17:38:17 by pgros            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,14 @@ SRC_UTILS_FILES = content_utils.c \
 					lst_utils.c \
 					strtab_utils.c
 
+SRC_EXECUTE_FILES = 	child_process.c \
+						find_path.c
+
 SRC_PARSER = $(addprefix parser/, $(SRC_PARSER_FILES))
 
 SRC_UTILS = $(addprefix utils/, $(SRC_UTILS_FILES))
+
+SRC_EXECUTE = $(addprefix execute/, $(SRC_EXECUTE_FILES))
 
 # SRC = $(addprefix ./src/, $(SRC_MAIN) \
 # 						$(SRC_PARSER) \
@@ -37,7 +42,8 @@ SRC_UTILS = $(addprefix utils/, $(SRC_UTILS_FILES))
 
 SRC = $(SRC_MAIN) \
 		$(SRC_PARSER) \
-		$(SRC_UTILS)
+		$(SRC_UTILS) \
+		$(SRC_EXECUTE)
 						
 # SRC    := $(shell find src -type f -name *.c)
 #./objs
