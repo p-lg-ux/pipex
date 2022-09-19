@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:37:13 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/13 13:59:12 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/19 17:54:37 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	__pipe_it(t_list *command)
 	ret = pipe(fds);
 	if (ret == -1)
 		perror("pipe")
-	(__get_content(command->next))->fds_in = fds;
+	((__get_content(command->next))->fds_in)[0] = fds[0];
+	((__get_content(command->next))->fds_in)[1] = fds[1];
 }
 
 /**
@@ -76,7 +77,6 @@ void	__execute(t_parse *parsing, char **envp)
 	while (command != NULL)
 	{
 		__fork_process(command, envp);
-		wait();
 		if (command != parsing->commands)
 			__close_fds_in(command);
 		command = commands->next;
