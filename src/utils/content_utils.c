@@ -6,11 +6,37 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 16:18:31 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 11:47:28 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 14:38:25 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
+
+void	__set_path(t_content *content, char *cmd_short)
+{
+	if (content == NULL || cmd_short == NULL)
+		return ;
+	content->path = NULL;
+	if (ft_strncmp(cmd_short, "/", 1) == 0)
+		content->path = ft_strdup(cmd_short);
+	if (ft_strncmp(cmd_short, "./", 2) == 0)
+		content->path = ft_strdup(cmd_short);
+	if (ft_strncmp(cmd_short, "../", 3) == 0)
+		content->path = ft_strdup(cmd_short);
+	if (ft_strncmp(cmd_short, "~/", 2) == 0)
+		content->path = ft_strdup(cmd_short);
+	return ;	
+}
+
+void	__set_fds(t_content *content)
+{
+	if (content == NULL)
+		return ;
+	(content->fds_in)[0] = -1;
+	(content->fds_in)[1] = -1;
+	(content->fds_out)[0] = -1;
+	(content->fds_out)[1] = -1;
+}
 
 t_content	*__newcontent(char *cmd)
 {
@@ -27,7 +53,8 @@ t_content	*__newcontent(char *cmd)
 	new->arg = ft_split(new_cmd, ' ');
 	if (new->arg != NULL)
 		new->cmd_short = ft_strdup((new->arg)[0]);
-	new->path = NULL;
+	__set_path(new, new->cmd_short);
+	__set_fds(new);
 	return (new);
 }
 
@@ -59,6 +86,9 @@ void	__print_content(t_content *content)
 	while ((content->arg)[++i] != NULL)
 		ft_printf(" %s ;", (content->arg)[i]);
 	ft_printf("\n");
+	ft_printf("path : %s\n", content->path);
+	ft_printf("fds_in : %i -> %i\n", (content->fds_in)[1], (content->fds_in)[0]);
+	ft_printf("fds_out : %i -> %i\n", (content->fds_out)[1], (content->fds_out)[0]);
 }
 
 t_content	*__get_content(t_llist *command)

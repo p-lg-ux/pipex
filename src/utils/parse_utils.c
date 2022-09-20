@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:04:30 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 11:51:15 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 14:41:22 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	__print_parse(t_parse *parsing)
 		ft_printf("(null)\n");
 	else
 	{
-		ft_printf("infile : %s\n", parsing->infile);
+		ft_printf("infile : %s\n\n", parsing->infile);
 		__print_llst(parsing->commands);
 		ft_printf("outfile : %s\n", parsing->outfile);
 	}

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:10:49 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 11:49:14 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 17:23:58 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ t_parse	*__parse(int argc, char **argv)
 	parsing = ft_calloc(1, sizeof(t_parse));
 	if (parsing == NULL)
 		return (NULL);
-	i = 2;
-	while (i < argc - 1)
+	i = 1;
+	while (++i < argc - 1)
 	{
 		content = __newcontent(argv[i]);
 		if (content == NULL)
 			return (__free_parse(parsing), NULL);
+		content->parsing = parsing;
 		node = ft_llstnew(content);
 		if (node == NULL)
 			return (__free_parse(parsing), __free_content(content), NULL);
 		ft_llstadd_back(&(parsing->commands), node);
-		i++;
 	}
 	parsing->infile = ft_strdup(argv[1]);
 	parsing->outfile = ft_strdup(argv[argc - 1]);

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:58:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 11:47:28 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 17:11:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	__child_process(t_llist *command, char **envp)
 	path = __find_command_path(command, envp);
 	content = __get_content(command);
 	if (path == NULL)
-	{	
+	{
 		ft_putstr_fd(content->cmd_short, STDERR_FILENO);
 		ft_putstr_fd(": command not found.\n", STDERR_FILENO);
 	}

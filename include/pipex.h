@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 11:55:05 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 17:52:19 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ struct s_content{
 	char	*path;
 	int		fds_in[2];
 	int		fds_out[2];
+	t_parse	*parsing;
 };
 
 // UTILS
@@ -62,6 +63,6 @@ char		**__get_path_var_tab(char **envp);
 char		**__get_paths_list(t_llist *command, char **envp);
 void		__fill_paths_list(char **str_tab, char **path_var,
 				t_llist *command);
-char	*__find_command_path(t_llist *command, char **envp);
+char		*__find_command_path(t_llist *command, char **envp);
 
 #endif
