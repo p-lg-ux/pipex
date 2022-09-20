@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:04:30 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/09 12:07:47 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 11:51:15 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	__free_parse(t_parse *parsing)
 		free(parsing->infile);
 	if (parsing->outfile != NULL)
 		free(parsing->outfile);
-	ft_lstclear(&(parsing->commands), &__free_content);
+	ft_llstclear(&(parsing->commands), &__free_content);
 	free(parsing);
 }
 
@@ -32,7 +32,7 @@ void	__print_parse(t_parse *parsing)
 	else
 	{
 		ft_printf("infile : %s\n", parsing->infile);
-		__print_lst(parsing->commands);
+		__print_llst(parsing->commands);
 		ft_printf("outfile : %s\n", parsing->outfile);
 	}
 	ft_printf("--------------------\n");

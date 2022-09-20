@@ -6,20 +6,20 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:48:16 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/09 17:25:55 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 11:51:15 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-void	__print_lst(t_list *lst)
+void	__print_llst(t_llist *llst)
 {
 	t_content *content;
 
-	while (lst != NULL)
+	while (llst != NULL)
 	{
-		content = lst->content;
+		content = llst->content;
 		__print_content(content);
-		lst = lst->next;
+		llst = llst->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:10:49 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/09 17:25:55 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 11:49:14 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_parse	*__parse(int argc, char **argv)
 {
 	t_parse		*parsing;
-	t_list		*node;
+	t_llist		*node;
 	t_content	*content;
 	int			i;
 
@@ -28,10 +28,10 @@ t_parse	*__parse(int argc, char **argv)
 		content = __newcontent(argv[i]);
 		if (content == NULL)
 			return (__free_parse(parsing), NULL);
-		node = ft_lstnew(content);
+		node = ft_llstnew(content);
 		if (node == NULL)
 			return (__free_parse(parsing), __free_content(content), NULL);
-		ft_lstadd_back(&(parsing->commands), node);
+		ft_llstadd_back(&(parsing->commands), node);
 		i++;
 	}
 	parsing->infile = ft_strdup(argv[1]);

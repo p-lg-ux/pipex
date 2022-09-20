@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:36:43 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/15 18:02:45 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 11:47:28 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**__get_path_var_tab(char **envp)
 	return (path_tab);
 }
 
-void	__fill_paths_list(char ***str_tab, char **path_var, t_list *command)
+void	__fill_paths_list(char ***str_tab, char **path_var, t_llist *command)
 {
 	char	*str;
 	int		i;
@@ -65,13 +65,13 @@ void	__fill_paths_list(char ***str_tab, char **path_var, t_list *command)
 		return (__free_strtab(path_var), __free_strtab(*str_tab));
 }
 
-//TODO: function __get_paths_list(t_list *command, char **envp)
+//TODO: function __get_paths_list(t_llist *command, char **envp)
 // Must deal with :
 // - the case where the path of the bin is already given instead 
 // of just the command.
 // - the case where there is no environment (envp = NULL)
 // Must return a str_tab like {"/usr/bin/ls", "/bin/ls", NULL}
-char	**__get_paths_list(t_list *command, char **envp)
+char	**__get_paths_list(t_llist *command, char **envp)
 {
 	char	**str_tab;
 	char	**path_var;
@@ -88,7 +88,7 @@ char	**__get_paths_list(t_list *command, char **envp)
 	return (str_tab);
 }
 
-char	*__find_command_path(t_list *command, char **envp)
+char	*__find_command_path(t_llist *command, char **envp)
 {
 	char	**paths_list;
 	int		i;

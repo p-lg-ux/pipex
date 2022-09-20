@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:37:13 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/19 17:54:37 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 11:47:28 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * 
  * @param command Current command. Node of the chained list of commands.
  */
-void	__pipe_it(t_list *command)
+void	__pipe_it(t_llist *command)
 {
 	int	fds[2];
 	int	ret;
@@ -37,7 +37,7 @@ void	__pipe_it(t_list *command)
  * @param command Current command. Node of the chained list of commands.
  * @param envp Dictionnary of environment variables.
  */
-void	__fork_process(t_list *command, char **envp)
+void	__fork_process(t_llist *command, char **envp)
 {
 	int	child;
 	
@@ -55,7 +55,7 @@ void	__fork_process(t_list *command, char **envp)
  * 
  * @param command 
  */
-void	__close_fds_in(t_list *command)
+void	__close_fds_in(t_llist *command)
 {
 	close((__get_content(command))->fds_in[0]);
 	close((__get_content(command))->fds_in[1]);
@@ -70,7 +70,7 @@ void	__close_fds_in(t_list *command)
  */
 void	__execute(t_parse *parsing, char **envp)
 {
-	t_list	*commands;
+	t_llist	*commands;
 
 	__open_fds(parsing);
 	command = parsing->commands;

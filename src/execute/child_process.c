@@ -6,13 +6,13 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:58:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/15 17:37:52 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/20 11:47:28 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-void	__duplicate_fds(t_list *command)
+void	__duplicate_fds(t_llist *command)
 {
 	t_content	*content;
 	int			ret;
@@ -30,7 +30,7 @@ void	__duplicate_fds(t_list *command)
 	close(content->fds_out[1]);
 }
 
-void	__child_process(t_list *command, char **envp)
+void	__child_process(t_llist *command, char **envp)
 {
 	char		*path;
 	t_content	*content;
