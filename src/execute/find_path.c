@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:36:43 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 11:47:28 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/21 21:28:27 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	__fill_paths_list(char ***str_tab, char **path_var, t_llist *command)
 	{
 		str = ft_strjoin(path_var[i], "/");
 		if (str == NULL)
-		{
 			return (__free_strtab(path_var), __free_strtab(*str_tab));
 		(*str_tab)[i] = ft_strjoin(str, (__get_content(command))->cmd_short);
 		if ((*str_tab)[i] == NULL)
@@ -60,9 +59,9 @@ void	__fill_paths_list(char ***str_tab, char **path_var, t_llist *command)
 		free(str);
 		i++;
 	}
-	(*str_tab)[i] = ft_strdup((__get_content(command))->cmd_short);
-	if ((*str_tab)[i] == NULL)
-		return (__free_strtab(path_var), __free_strtab(*str_tab));
+	// (*str_tab)[i] = ft_strdup((__get_content(command))->cmd_short);
+	// if ((*str_tab)[i] == NULL)
+	// 	return (__free_strtab(path_var), __free_strtab(*str_tab));
 }
 
 //TODO: function __get_paths_list(t_llist *command, char **envp)
@@ -76,37 +75,85 @@ char	**__get_paths_list(t_llist *command, char **envp)
 	char	**str_tab;
 	char	**path_var;
 	int		len;
-	char	*str;
-	int		i;
+	// char	*str;
+	// int		i;
 	
 	path_var = __get_path_var_tab(envp);
 	len = __strtab_len(path_var);
-	str_tab = ft_calloc(len + 2, sizeof(char *));
+	str_tab = ft_calloc(len + 1, sizeof(char *));
 	if (str_tab == NULL)
+	{
+		perror("malloc");
 		return (__free_strtab(path_var), NULL);
+	}
 	__fill_paths_list(&str_tab, path_var, command);
 	return (str_tab);
 }
 
-char	*__find_command_path(t_llist *command, char **envp)
-{
-	char	**paths_list;
-	int		i;
-	int		ret;
+// char	*__find_command_path(t_llist *command, char **envp)
+// {
+// 	char	**paths_list;
+// 	int		i;
+// 	int		ret;
 
-	paths_list = __get_paths_list(command, envp);
-	if (paths_list == NULL)
-		return (NULL);
-	i = 0;
-	while (paths_list[i] != NULL)
+// 	paths_list = __get_paths_list(command, envp);
+// 	if (paths_list == NULL)
+// 		return (NULL);
+// 	i = 0;
+// 	while (paths_list[i] != NULL)
+// 	{
+// 		ret = access(paths_list[i], X_OK);
+// 		if (ret == 0)
+// 			break ;
+// 		i++;
+// 	}
+// 	if (paths_list[i] != NULL)
+// 		(__get_content(command))->path = ft_strdup(paths_list[i]);
+// 	__free_strtab(paths_list);
+// 	return ((__get_content(command))->path);
+// }
+
+void	__command_error(t_llist *command)
+{
+	t_content	*content;
+
+	content = __get_content(command);
+	ft_putstr_fd(content->cmd_short, STDERR_FILENO);
+	ft_putstr_fd(": command not found.\n", STDERR_FILENO);
+	exit(EXIT_FAILURE);
+}
+
+void	__find_command_path(t_llist *command, char **envp)
+{
+	t_content	*content;
+	int			ret;
+	char		**paths_list;
+	int			i;
+	
+	content = __get_content(command);
+	if (content->path != NULL)
 	{
-		ret = access(paths_list[i], X_OK);
-		if (ret == 0)
-			break ;
-		i++;
+		ret = access(content->path, X_OK);
+		if (ret < 0)
+		{
+			perror(content->path);
+			exit(EXIT_FAILURE);
+		}
 	}
-	if (paths_list[i] != NULL)
-		(__get_content(command))->path = ft_strdup(paths_list[i]);
-	__free_strtab(paths_list);
-	return ((__get_content(command))->path);
+	else
+	{
+		paths_list = __get_paths_list(command, envp);
+		i = 0;
+		while (paths_list[i] != NULL)
+		{
+			ret = access(paths_list[i], X_OK);
+			if (ret == 0)
+				break ;
+			i++;
+		}
+		if (paths_list[i] == NULL)
+			__command_error(command);
+		else
+			content->path = paths_list[i];
+	}
 }

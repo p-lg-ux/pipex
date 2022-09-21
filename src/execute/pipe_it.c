@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:46:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 17:50:24 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/21 21:23:33 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
  */
 void	__pipe_it(t_llist *command)
 {
-	int	fds[2];
-	int	ret;
+	int			ret;
+	t_content	*content;
+	t_content	*content_next;
 /*
 	if (command->previous == NULL)
 	{
@@ -34,11 +35,12 @@ void	__pipe_it(t_llist *command)
 		__pipe_fds(command);*/
 	if (command->next != NULL)
 	{
-		fds = (__get_content(command))->fds_out;
-		ret = pipe(fds);
+		content = __get_content(command);
+		content_next = __get_content(command->next);
+		ret = pipe(content->fds_out);
 		if (ret == -1)
-			perror("pipe")
-		((__get_content(command->next))->fds_in)[0] = fds[0];
-		((__get_content(command->next))->fds_in)[1] = fds[1];
+			perror("pipe");
+		content_next->fds_in[0] = content->fds_out[0];
+		content_next->fds_in[1] = content->fds_out[1];
 	}
 }

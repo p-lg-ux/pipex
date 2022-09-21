@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 17:52:19 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/21 21:29:55 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <sys/wait.h>
+# include <errno.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 typedef struct s_parse		t_parse;
 typedef struct s_content	t_content;
@@ -57,12 +61,31 @@ void		__print_llst(t_llist *llst);
 t_parse		*__parse(int argc, char **argv);
 
 // EXECUTE
-void		__execute(t_parse *parsing, char **envp);
 
+//	execute.c
+void		__execute(t_parse *parsing, char **envp);
+void	__close_fds_out(t_llist *command);
+void	__close_fds_in(t_llist *command);
+void	__fork_process(t_llist *command, char **envp);
+
+//	child_process.c
+void		__duplicate_fds(t_llist *command);
+void		__child_process(t_llist *command, char **envp);
+
+//	find_path.c
 char		**__get_path_var_tab(char **envp);
 char		**__get_paths_list(t_llist *command, char **envp);
-void		__fill_paths_list(char **str_tab, char **path_var,
+void		__fill_paths_list(char ***str_tab, char **path_var,
 				t_llist *command);
-char		*__find_command_path(t_llist *command, char **envp);
+void		__command_error(t_llist *command);
+void		__find_command_path(t_llist *command, char **envp);
+
+//	open_fds.c
+void		__open_infile(t_llist *command);
+void		__open_outfile(t_llist *command);
+void		__open_files(t_llist *command);
+
+//	pipe_it.c
+void	__pipe_it(t_llist *command);
 
 #endif
