@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:36:43 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/21 21:28:27 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/22 18:01:44 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char	**__get_paths_list(t_llist *command, char **envp)
 		return (__free_strtab(path_var), NULL);
 	}
 	__fill_paths_list(&str_tab, path_var, command);
+	__free_strtab(path_var);
 	return (str_tab);
 }
 
@@ -113,10 +114,11 @@ char	**__get_paths_list(t_llist *command, char **envp)
 // 	return ((__get_content(command))->path);
 // }
 
-void	__command_error(t_llist *command)
+void	__command_error(t_llist *command, char **paths_list)
 {
 	t_content	*content;
 
+	__free_strtab(paths_list);
 	content = __get_content(command);
 	ft_putstr_fd(content->cmd_short, STDERR_FILENO);
 	ft_putstr_fd(": command not found.\n", STDERR_FILENO);
@@ -135,10 +137,11 @@ void	__find_command_path(t_llist *command, char **envp)
 	{
 		ret = access(content->path, X_OK);
 		if (ret < 0)
-		{
-			perror(content->path);
-			exit(EXIT_FAILURE);
-		}
+			__ultimate_exit(command, content->path);
+		// {
+		// 	perror(content->path);
+		// 	exit(EXIT_FAILURE);
+		// }
 	}
 	else
 	{
@@ -152,8 +155,9 @@ void	__find_command_path(t_llist *command, char **envp)
 			i++;
 		}
 		if (paths_list[i] == NULL)
-			__command_error(command);
+			__command_error(command, paths_list);
 		else
-			content->path = paths_list[i];
+			content->path = ft_strdup(paths_list[i]);
+		__free_strtab(paths_list);
 	}
 }

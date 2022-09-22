@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 16:47:09 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/21 16:35:28 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/22 18:00:25 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	__open_infile(t_llist *command)
 	content = __get_content(command);
 	fd = open(content->parsing->infile, O_RDONLY);
 	if (fd < 0)
-	{
-		perror("open");
-		return ;
-	}
+		__ultimate_exit(command, "open");
 	content->fds_in[0] = fd;
 }
 
@@ -35,10 +32,7 @@ void	__open_outfile(t_llist *command)
 	content = __get_content(command);
 	fd = open(content->parsing->outfile, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd < 0)
-	{
-		perror("open");
-		return ;
-	}
+		__ultimate_exit(command, "open");
 	content->fds_out[1] = fd;
 }
 

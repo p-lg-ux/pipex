@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:37:13 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/21 21:16:53 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/22 16:53:06 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,52 +30,6 @@ void	__fork_process(t_llist *command, char **envp)
 }
 
 /**
- * @brief Closes the pipe in input of command
- * 
- * @param command 
- */
-void	__close_fds_in(t_llist *command)
-{
-	int	fd;
-
-	fd = (__get_content(command))->fds_in[0];
-	if (fd != -1)
-	{
-		close(fd);
-		(__get_content(command))->fds_in[0] = -1;
-	}
-	fd = (__get_content(command))->fds_in[1];
-	if (fd != -1)
-	{
-		close(fd);
-		(__get_content(command))->fds_in[1] = -1;
-	}
-}
-
-/**
- * @brief Closes the pipe in input of command
- * 
- * @param command 
- */
-void	__close_fds_out(t_llist *command)
-{
-	int	fd;
-
-	fd = (__get_content(command))->fds_out[0];
-	if (fd != -1)
-	{
-		close(fd);
-		(__get_content(command))->fds_out[0] = -1;
-	}
-	fd = (__get_content(command))->fds_out[1];
-	if (fd != -1)
-	{
-		close(fd);
-		(__get_content(command))->fds_out[1] = -1;
-	}
-}
-
-/**
  * @brief Opens the fd for the infile and the outfile and executes all
  * commands in the chained list.
  * 
@@ -87,7 +41,6 @@ void	__execute(t_parse *parsing, char **envp)
 	t_llist	*command;
 	int		ret;
 
-	//TODO : l.76 a modifier 
 	command = parsing->commands;
 	while (command != NULL)
 	{
