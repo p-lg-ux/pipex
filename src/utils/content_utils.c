@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 16:18:31 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/20 14:38:25 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 16:03:17 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	__set_path(t_content *content, char *cmd_short)
 		content->path = ft_strdup(cmd_short);
 	if (ft_strncmp(cmd_short, "~/", 2) == 0)
 		content->path = ft_strdup(cmd_short);
-	return ;	
+	return ;
 }
 
 void	__set_fds(t_content *content)
@@ -42,7 +42,7 @@ t_content	*__newcontent(char *cmd)
 {
 	t_content	*new;
 	char		*new_cmd;
-	
+
 	new_cmd = ft_strdup(cmd);
 	if (new_cmd == NULL)
 		return (NULL);
@@ -61,7 +61,7 @@ t_content	*__newcontent(char *cmd)
 void	__free_content(void *c)
 {
 	t_content	*content;
-	
+
 	content = c;
 	if (content == NULL)
 		return ;
@@ -75,26 +75,10 @@ void	__free_content(void *c)
 	free(content);
 }
 
-void	__print_content(t_content *content)
-{
-	int	i;
-	
-	ft_printf("cmd : %s\n", content->cmd);
-	ft_printf("cmd_short : %s\n", content->cmd_short);
-	ft_printf("arg :");
-	i = -1;
-	while ((content->arg)[++i] != NULL)
-		ft_printf(" %s ;", (content->arg)[i]);
-	ft_printf("\n");
-	ft_printf("path : %s\n", content->path);
-	ft_printf("fds_in : %i -> %i\n", (content->fds_in)[1], (content->fds_in)[0]);
-	ft_printf("fds_out : %i -> %i\n", (content->fds_out)[1], (content->fds_out)[0]);
-}
-
 t_content	*__get_content(t_llist *command)
 {
 	t_content	*ret;
-	
+
 	ret = command->content;
 	return (ret);
 }

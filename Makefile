@@ -6,7 +6,7 @@
 #    By: pgros <pgros@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 14:58:11 by pgros             #+#    #+#              #
-#    Updated: 2022/09/23 13:30:59 by pgros            ###   ########.fr        #
+#    Updated: 2022/09/23 16:05:01 by pgros            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRC_PARSER_FILES = parse.c
 
 SRC_UTILS_FILES = content_utils.c \
 					parse_utils.c \
-					llst_utils.c \
-					strtab_utils.c
+					strtab_utils.c \
+					prints.c
 
 SRC_EXECUTE_FILES = 	execute.c \
 						find_path.c \

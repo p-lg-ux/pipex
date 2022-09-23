@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:37:13 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/22 16:53:06 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 16:08:05 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 void	__fork_process(t_llist *command, char **envp)
 {
 	int	child_pid;
-	
+
 	child_pid = fork();
 	if (child_pid < -1)
-		perror("fork");
+		__ultimate_exit(command, "fork");
 	if (child_pid == 0)
 		__child_process(command, envp);
 }
@@ -51,7 +51,6 @@ void	__execute(t_parse *parsing, char **envp)
 			__close_fds_out(command);
 		command = command->next;
 	}
-	
 	ret = 0;
 	while (ret != -1 || errno != ECHILD)
 		ret = wait(NULL);

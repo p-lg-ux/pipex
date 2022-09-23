@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 15:06:41 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/15 17:48:36 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 16:06:39 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	__free_strtab(char **tab)
 {
 	int	i;
-	
+
 	if (tab == NULL)
 		return ;
 	i = 0;
@@ -37,18 +37,4 @@ int	__strtab_len(char **tab)
 	while (tab[i] != NULL)
 		i++;
 	return (i);
-}
-
-void	__print_strtab(char **tab)
-{
-	int	i;
-
-	if (tab == NULL)
-		return ;
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
 }

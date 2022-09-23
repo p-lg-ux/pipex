@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:58:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/23 13:27:30 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 16:09:26 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,4 @@ void	__child_process(t_llist *command, char **envp)
 	content = __get_content(command);
 	execve(content->path, content->arg, envp);
 	__ultimate_exit(command, "execve");
-	// perror("execve");
-	// exit(EXIT_FAILURE);
 }
