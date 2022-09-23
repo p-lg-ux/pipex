@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:58:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/21 21:17:25 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 13:27:30 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	__duplicate_fds(t_llist *command)
 		close(content->fds_out[0]);
 	ret = dup2(content->fds_in[0], STDIN_FILENO);
 	if (ret < 0)
-		perror("dup2");
+		__ultimate_exit(command, "dup2");
 	close(content->fds_in[0]);
 	ret = dup2(content->fds_out[1], STDOUT_FILENO);
 	if (ret < 0)
-		perror("dup2");
+		__ultimate_exit(command, "dup2");
 	close(content->fds_out[1]);
 }
 
@@ -41,6 +41,7 @@ void	__child_process(t_llist *command, char **envp)
 	__find_command_path(command, envp);
 	content = __get_content(command);
 	execve(content->path, content->arg, envp);
-	perror("execve");
-	exit(EXIT_FAILURE);
+	__ultimate_exit(command, "execve");
+	// perror("execve");
+	// exit(EXIT_FAILURE);
 }

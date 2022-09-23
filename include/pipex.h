@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/22 15:24:30 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 13:32:53 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,11 @@ void		__open_files(t_llist *command);
 
 //	pipe_it.c
 void		__pipe_it(t_llist *command);
+
+//	ultimate_exit.c
+void		__close_all_fds(t_llist *command);
+void		__close_fds_out(t_llist *command);
+void		__close_fds_in(t_llist *command);
+void		__ultimate_exit(t_llist *command, char *message);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:02:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/22 15:46:23 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 13:47:39 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ int main(int argc, char **argv, char **envp)
 {
 	t_parse	*parsing;
 	// char	**str_tab;
-	(void) envp ;
+	
+	if (argc < 5)
+	{
+		ft_putstr_fd("Not enough arguments\n", STDERR_FILENO);
+		return (-1);
+	}
 	parsing = __parse(argc, argv);
 	if (parsing == NULL)
 		return (ft_printf("malloc failed\n"), -1);
-	//TODO : check in and out files (existence and/or permission) + open fds
 	
 	// __print_parse(parsing);
 	// __check_files_permissions(parsing);

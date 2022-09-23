@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:00:34 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/22 17:57:07 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 13:33:44 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	__close_all_fds(t_llist *command)
 void	__ultimate_exit(t_llist *command, char *message)
 {
 	perror(message);
-	__free_parse(command->parsing);
+	__free_parse((__get_content(command))->parsing);
 	exit(EXIT_FAILURE);
 }

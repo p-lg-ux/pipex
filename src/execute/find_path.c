@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:36:43 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/22 18:01:44 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/23 13:41:28 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	**__get_paths_list(t_llist *command, char **envp)
 // 	__free_strtab(paths_list);
 // 	return ((__get_content(command))->path);
 // }
-
+//TODO : find a way to write the error message in 1 times and not 2 times due to children process and outputs intermingling
 void	__command_error(t_llist *command, char **paths_list)
 {
 	t_content	*content;
@@ -122,6 +122,7 @@ void	__command_error(t_llist *command, char **paths_list)
 	content = __get_content(command);
 	ft_putstr_fd(content->cmd_short, STDERR_FILENO);
 	ft_putstr_fd(": command not found.\n", STDERR_FILENO);
+	__free_parse((__get_content(command))->parsing);
 	exit(EXIT_FAILURE);
 }
 
