@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:36:43 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/23 16:13:00 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/26 19:26:14 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	__command_error(t_llist *command, char **paths_list)
 	message = ft_strjoin(content->cmd_short, ": command not found\n");
 	ft_putstr_fd(message, STDERR_FILENO);
 	free(message);
+	__close_all_fds(command);
 	__free_parse((__get_content(command))->parsing);
 	exit(EXIT_FAILURE);
 }
@@ -114,7 +115,7 @@ void	__find_command_path(t_llist *command, char **envp)
 				break ;
 			i++;
 		}
-		if (paths_list[i] == NULL)
+		if (paths_list[i] == NULL || (content->cmd_short)[0] == '\0')
 			__command_error(command, paths_list);
 		else
 			content->path = ft_strdup(paths_list[i]);

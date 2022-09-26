@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:02:59 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/23 16:05:49 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/26 19:31:56 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	__print_llst(t_llist *llst)
 	{
 		content = llst->content;
 		__print_content(content);
+		ft_printf("next : %#x\n", llst->next);
+		ft_printf("previous : %#x\n", llst->previous);
 		ft_printf("\n");
 		llst = llst->next;
 	}

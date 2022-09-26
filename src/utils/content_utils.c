@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 16:18:31 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/23 16:03:17 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/26 16:42:20 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ t_content	*__newcontent(char *cmd)
 	new->cmd = new_cmd;
 	new->arg = ft_split(new_cmd, ' ');
 	if (new->arg != NULL)
-		new->cmd_short = ft_strdup((new->arg)[0]);
+	{
+		if ((new->arg)[0] != NULL)
+			new->cmd_short = ft_strdup((new->arg)[0]);
+		else
+			new->cmd_short = ft_strdup(new->cmd);
+	}
 	__set_path(new, new->cmd_short);
 	__set_fds(new);
 	return (new);

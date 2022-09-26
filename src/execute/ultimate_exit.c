@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:00:34 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/23 16:08:24 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/26 19:33:55 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	__close_all_fds(t_llist *command)
 	{
 		__close_fds_in(command);
 		__close_fds_out(command);
+		command = command->next;
 	}
 }
 
