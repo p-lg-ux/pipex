@@ -6,7 +6,7 @@
 #    By: pgros <pgros@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 14:58:11 by pgros             #+#    #+#              #
-#    Updated: 2022/09/26 17:03:52 by pgros            ###   ########.fr        #
+#    Updated: 2022/09/27 12:47:08 by pgros            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRC_EXECUTE_FILES = 	execute.c \
 						find_path.c \
 						child_process.c \
 						open_fds.c \
-						pipe_it.c \
 						ultimate_exit.c
 
 SRC_PARSER = $(addprefix parser/, $(SRC_PARSER_FILES))

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/23 13:32:53 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/27 15:40:57 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 typedef struct s_parse		t_parse;
 typedef struct s_content	t_content;
+typedef enum e_do_close		t_do_close;
 
 struct s_parse{
 	char	*infile;
@@ -39,6 +40,11 @@ struct s_content{
 	int		fds_in[2];
 	int		fds_out[2];
 	t_parse	*parsing;
+};
+
+enum e_do_close{
+	DONT_CLOSE_FDS	= 0,
+	CLOSE_FDS		= 1,
 };
 
 // UTILS
@@ -64,9 +70,8 @@ t_parse		*__parse(int argc, char **argv);
 
 //	execute.c
 void		__execute(t_parse *parsing, char **envp);
-void		__close_fds_out(t_llist *command);
-void		__close_fds_in(t_llist *command);
 void		__fork_process(t_llist *command, char **envp);
+void		__pipe_it(t_llist *command);
 
 //	child_process.c
 void		__duplicate_fds(t_llist *command);
@@ -85,13 +90,11 @@ void		__open_infile(t_llist *command);
 void		__open_outfile(t_llist *command);
 void		__open_files(t_llist *command);
 
-//	pipe_it.c
-void		__pipe_it(t_llist *command);
-
 //	ultimate_exit.c
 void		__close_all_fds(t_llist *command);
 void		__close_fds_out(t_llist *command);
 void		__close_fds_in(t_llist *command);
-void		__ultimate_exit(t_llist *command, char *message);
+void		__ultimate_exit(t_llist *command, char *message,
+				t_do_close do_close_fds);
 
 #endif

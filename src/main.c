@@ -6,19 +6,19 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:02:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/26 19:56:51 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/27 16:48:28 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-//TODO : bien proteger tous les mallocs avec ultimate_exit, notamment ceux des fonctions de la libft
-//TODO : faire le bonus heredoc
-//TODO : faire tester la version actuelle a Roland
-//TODO : Gerer le cas de lexecution d'un non binaire (ex : ./cat dans lequel il y a ls) et eviter l'erreur execve
-// TODO : ./pipex "" "" "" "" => segfault
-// TODO : ./pipex a b c d => erreur de valgrind : fd (pipe) restent open
-// TODO : normer le code
+// TODO 3 : bien proteger tous les mallocs avec ultimate_exit, notamment ceux des fonctions de la libft
+// TODO : faire le bonus heredoc
+// TODO 5 : faire tester la version actuelle a Roland
+// TODO : Gerer le cas de lexecution d'un non binaire (ex : ./cat dans lequel il y a ls) et eviter l'erreur execve
+// TODO 1 : ./pipex "" "" "" "" => segfault
+// TODO 2 : ./pipex a b c d => erreur de valgrind : fd (pipe) restent open
+// TODO 4 : normer le code
 
 int main(int argc, char **argv, char **envp)
 {
