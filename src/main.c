@@ -6,13 +6,14 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:02:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/28 18:48:23 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/28 21:17:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
 // TODO 5 : bien proteger tous les mallocs avec ultimate_exit, notamment ceux des fonctions de la libft
+// TODO 5.2 : checker toutes les protections de mallocs
 // ? TODO : faire le bonus heredoc
 // TODO 7 : faire tester la version actuelle a Roland
 // ? TODO : Gerer le cas de lexecution d'un non binaire (ex : ./cat dans lequel il y a ls) et eviter l'erreur execve

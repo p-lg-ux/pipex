@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:36:43 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/28 19:17:51 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/28 21:28:02 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ char	**__get_path_var_tab(char **envp)
 	char	**path_tab;
 	int		i;
 
-	i = 0;
+	i = -1;
 	path_str = NULL;
-	while (envp[i] != NULL)
+	while (envp[++i] != NULL)
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
 			path_str = envp[i];
 			break ;
 		}
-		i++;
 	}
 	if (path_str == NULL)
-			path_str = "";
-	path_str = ft_strtrim(path_str, "PATH=");
+		path_str = ft_strdup("");
+	else
+		path_str = ft_strtrim(path_str, "PATH=");
 	if (path_str == NULL)
 		return (perror("malloc"), NULL);
 	path_tab = ft_split(path_str, ':');
@@ -115,8 +115,7 @@ void	__find_command_path(t_llist *command, char **envp)
 	{
 		paths_list = __get_paths_list(command, envp);
 		if (paths_list == NULL)
-		{
-		}
+			__ultimate_exit(command, NULL, CLOSE_FDS);
 		i = 0;
 		while (paths_list[i] != NULL)
 		{
@@ -128,7 +127,14 @@ void	__find_command_path(t_llist *command, char **envp)
 		if (paths_list[i] == NULL || (content->cmd_short)[0] == '\0')
 			__command_error(command, paths_list);
 		else
+		{
 			content->path = ft_strdup(paths_list[i]);
+			if (content->path == NULL)
+			{
+				__free_strtab(paths_list);
+				__ultimate_exit(command, "malloc", CLOSE_FDS);
+			}
+		}
 		__free_strtab(paths_list);
 	}
 }

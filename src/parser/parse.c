@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:10:49 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/28 18:48:06 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/28 19:31:12 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	__fill_commands_llist(t_parse *parsing, int argc, char **argv)
 			return (perror("malloc"), __free_content(content), -1);
 		ft_llstadd_back(&(parsing->commands), node);
 	}
+	return (0);
 }
 
 t_parse	*__parse(int argc, char **argv)

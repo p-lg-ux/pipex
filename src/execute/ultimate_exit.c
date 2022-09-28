@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:00:34 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/28 18:33:48 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/28 21:15:37 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void	__close_all_fds(t_llist *command)
 void	__ultimate_exit(t_llist *command, char *message,
 			t_do_close do_close_fds)
 {
-	perror(message);
+	if (message != NULL)
+		perror(message);
 	if (do_close_fds == CLOSE_FDS)
 		__close_all_fds(command);
 	__free_parse((__get_content(command))->parsing);
