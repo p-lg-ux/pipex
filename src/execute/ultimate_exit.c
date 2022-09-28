@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:00:34 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/27 15:53:07 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/28 18:33:48 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ void	__close_fds_in(t_llist *command)
 	{
 		ret = close(fd);
 		if (ret < 0)
-		{
 			__ultimate_exit(command, "close", DONT_CLOSE_FDS);
-		}
 		(__get_content(command))->fds_in[0] = -1;
+		if (command->previous != NULL)
+			(__get_content(command->previous))->fds_out[0] = -1;
 	}
 	fd = (__get_content(command))->fds_in[1];
 	if (fd != -1)
 	{
 		ret = close(fd);
 		if (ret < 0)
-		{
 			__ultimate_exit(command, "close", DONT_CLOSE_FDS);
-		}
 		(__get_content(command))->fds_in[1] = -1;
+		if (command->previous != NULL)
+			(__get_content(command->previous))->fds_out[1] = -1;
 	}
 }
 
@@ -59,20 +59,20 @@ void	__close_fds_out(t_llist *command)
 	{
 		ret = close(fd);
 		if (ret < 0)
-		{
 			__ultimate_exit(command, "close", DONT_CLOSE_FDS);
-		}
 		(__get_content(command))->fds_out[0] = -1;
+		if (command->next != NULL)
+			(__get_content(command->next))->fds_in[0] = -1;
 	}
 	fd = (__get_content(command))->fds_out[1];
 	if (fd != -1)
 	{
 		ret = close(fd);
 		if (ret < 0)
-		{
 			__ultimate_exit(command, "close", DONT_CLOSE_FDS);
-		}
 		(__get_content(command))->fds_out[1] = -1;
+		if (command->next != NULL)
+			(__get_content(command->next))->fds_out[0] = -1;
 	}
 }
 
@@ -102,7 +102,8 @@ void	__close_all_fds(t_llist *command)
  * @param do_close_fds CLOSE_FDS (1) if the fds must be closed,
  * DONT_CLOSE_FDS (0) otherwise.
  */
-void	__ultimate_exit(t_llist *command, char *message, t_do_close do_close_fds)
+void	__ultimate_exit(t_llist *command, char *message,
+			t_do_close do_close_fds)
 {
 	perror(message);
 	if (do_close_fds == CLOSE_FDS)
