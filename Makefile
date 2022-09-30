@@ -6,7 +6,7 @@
 #    By: pgros <pgros@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 14:58:11 by pgros             #+#    #+#              #
-#    Updated: 2022/09/30 16:14:14 by pgros            ###   ########.fr        #
+#    Updated: 2022/09/30 18:35:37 by pgros            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ RM = rm -f
 # 	$(CC) $(CFLAGS) -c -o $@ $<
 
 ./objs/%.o: ./src/%.c
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	
 $(NAME): $(OBJS) $(INC)
@@ -99,6 +100,10 @@ all:	$(NAME)
 clean:
 	make clean -C $(LIBDIR)
 	$(RM) $(OBJS)
+	rm -df objs/execute
+	rm -df objs/parser
+	rm -df objs/utils
+	rm -df objs	
 
 fclean: clean
 	make fclean -C $(LIBDIR)

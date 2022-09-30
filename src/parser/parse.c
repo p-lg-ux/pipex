@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:10:49 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/30 16:22:54 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/30 18:19:40 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ t_parse	*__parse(int argc, char **argv)
 	parsing->outfile = ft_strdup(argv[argc - 1]);
 	if (parsing->outfile == NULL)
 		return (perror("malloc"), __free_parse(parsing), NULL);
-	ret = __fill_commands_llist(parsing, argc, argv);
+	if (ft_strncmp(parsing->infile, "here_doc", 9) == 0)
+		ret = __fill_commands_llist(parsing, argc - 1, argv + 1);
+	else
+		ret = __fill_commands_llist(parsing, argc, argv);
 	if (ret < 0)
 		return (__free_parse(parsing), NULL);
 	return (parsing);
