@@ -6,35 +6,11 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 16:18:31 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/28 16:17:10 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/30 13:55:14 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
-
-int	__set_path(t_content *content, char *cmd_short)
-{
-	if (content == NULL || cmd_short == NULL)
-		return (-1);
-	content->path = NULL;
-	if (ft_strchr(cmd_short, '/') != NULL)
-	{
-		content->path = ft_strdup(cmd_short);
-		if (content->path == NULL)
-			return (perror("malloc"), -1);
-	}
-	return (0);
-}
-
-void	__set_fds(t_content *content)
-{
-	if (content == NULL)
-		return ;
-	(content->fds_in)[0] = -1;
-	(content->fds_in)[1] = -1;
-	(content->fds_out)[0] = -1;
-	(content->fds_out)[1] = -1;
-}
 
 void	__free_content(void *c)
 {
@@ -61,6 +37,8 @@ int	__fill_newcontent(t_content *new, char *cmd)
 	if (new->cmd == NULL)
 		return (perror("malloc"), __free_content(new), -1);
 	new->arg = ft_split(new->cmd, ' ');
+	__free_strtab(new->arg);
+	new->arg = NULL;
 	if (new->arg == NULL)
 		return (perror("malloc"), __free_content(new), -1);
 	if ((new->arg)[0] != NULL)

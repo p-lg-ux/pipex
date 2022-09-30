@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:02:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/28 21:17:18 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/29 16:37:22 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 // TODO 5 : bien proteger tous les mallocs avec ultimate_exit, notamment ceux des fonctions de la libft
 // TODO 5.2 : checker toutes les protections de mallocs
+// TODO 6 : reduire les fonctions trop longues et ajouter les nouvelles fonctions a pipex.h
 // ? TODO : faire le bonus heredoc
-// TODO 7 : faire tester la version actuelle a Roland
+// TODO 8 : faire tester la version actuelle a Roland
 // ? TODO : Gerer le cas de lexecution d'un non binaire (ex : ./cat dans lequel il y a ls) et eviter l'erreur execve
 // DONE 1 : ./pipex "" "" "" "" => segfault
 // DONE 2 : ./pipex a b c d => erreur de valgrind : fd (pipe) restent open
-// TODO 6 : normer le code
+// TODO 7 : normer le code
 // DONE 3 : modifier __set_path de facon a ce qu'un path soit detecte des qu'il y a un '/' dans la string cmd_short 
 // DONE 4 : gerer les remises a -1 des fds dans les close_fds
 

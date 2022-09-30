@@ -6,7 +6,7 @@
 #    By: pgros <pgros@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 14:58:11 by pgros             #+#    #+#              #
-#    Updated: 2022/09/27 12:47:08 by pgros            ###   ########.fr        #
+#    Updated: 2022/09/30 13:55:55 by pgros            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC_MAIN = main.c
 SRC_PARSER_FILES = parse.c
 
 SRC_UTILS_FILES = content_utils.c \
+					content_utils2.c \
 					parse_utils.c \
 					strtab_utils.c \
 					prints.c

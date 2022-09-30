@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/28 19:18:13 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/30 14:03:30 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,34 @@ enum e_do_close{
 };
 
 // UTILS
+
+//	strtab_utils.c
 void		__free_strtab(char **tab);
 int			__strtab_len(char **tab);
-void		__print_strtab(char **tab);
 
-t_content	*__newcontent(char *cmd);
-void		__free_content(void *c);
+//	prints.c
+void		__print_strtab(char **tab);
 void		__print_content(t_content *content);
+void		__print_parse(t_parse *parsing);
+void		__print_llst(t_llist *llst);
+
+//	content_utils.c
+void		__free_content(void *c);
+int			__fill_newcontent(t_content *new, char *cmd);
+t_content	*__newcontent(char *cmd);
 t_content	*__get_content(t_llist *command);
 
-void		__free_parse(t_parse *parsing);
-void		__print_parse(t_parse *parsing);
-// int			__check_files_permissions(t_parse *parsing);
+//	content_utils2.c
+int			__set_path(t_content *content, char *cmd_short);
+void		__set_fds(t_content *content);
 
-void		__print_llst(t_llist *llst);
+//	parse_utils.c
+void		__free_parse(t_parse *parsing);
+
 
 // PARSER
 t_parse		*__parse(int argc, char **argv);
+
 
 // EXECUTE
 
