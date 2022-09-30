@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:03:54 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/30 14:03:30 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/30 16:11:34 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,15 @@ void		__duplicate_fds(t_llist *command);
 void		__child_process(t_llist *command, char **envp);
 
 //	find_path.c
+void		__command_error(t_llist *command, char **paths_list);
+void		__check_all_paths(t_llist *command, char **envp);
+void		__find_command_path(t_llist *command, char **envp);
+
+//	find_path2.c
 char		**__get_path_var_tab(char **envp);
 char		**__get_paths_list(t_llist *command, char **envp);
 int			__fill_paths_list(char **str_tab, char **path_var,
 				t_llist *command);
-void		__command_error(t_llist *command, char **paths_list);
-void		__find_command_path(t_llist *command, char **envp);
 
 //	open_fds.c
 void		__open_infile(t_llist *command);

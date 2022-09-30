@@ -6,7 +6,7 @@
 #    By: pgros <pgros@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 14:58:11 by pgros             #+#    #+#              #
-#    Updated: 2022/09/30 13:55:55 by pgros            ###   ########.fr        #
+#    Updated: 2022/09/30 16:14:14 by pgros            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_UTILS_FILES = content_utils.c \
 
 SRC_EXECUTE_FILES = 	execute.c \
 						find_path.c \
+						find_path2.c \
 						child_process.c \
 						open_fds.c \
 						ultimate_exit.c

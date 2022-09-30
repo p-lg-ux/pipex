@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 16:18:31 by pgros             #+#    #+#             */
-/*   Updated: 2022/09/30 13:55:14 by pgros            ###   ########.fr       */
+/*   Updated: 2022/09/30 17:17:17 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	__fill_newcontent(t_content *new, char *cmd)
 	if (new->cmd == NULL)
 		return (perror("malloc"), __free_content(new), -1);
 	new->arg = ft_split(new->cmd, ' ');
-	__free_strtab(new->arg);
-	new->arg = NULL;
 	if (new->arg == NULL)
 		return (perror("malloc"), __free_content(new), -1);
 	if ((new->arg)[0] != NULL)
@@ -72,7 +70,7 @@ t_content	*__get_content(t_llist *command)
 {
 	t_content	*ret;
 
-	if (command  == NULL)
+	if (command == NULL)
 		return (NULL);
 	ret = command->content;
 	return (ret);
